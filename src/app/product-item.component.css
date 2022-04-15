@@ -13,16 +13,16 @@ h2 {
   font-size: 1.6em;
   flex: 1;
 }
-:host(.medium-movies) {
+:host(.line-movies) {
   border-color: #53ace4;
 }
-:host(.medium-movies) > h2 {
+:host(.line-movies) > h2 {
   color: #53ace4;
 }
-:host(.medium-series) {
+:host(.line-series) {
   border-color: #45bf94;
 }
-:host(.medium-series) > h2 {
+:host(.line-series) > h2 {
   color: #45bf94;
 }
 .tools {
@@ -35,6 +35,7 @@ h2 {
   width: 24px;
   height: 24px;
   fill: #bdc2c5;
+  cursor: pointer;
 }
 .favorite.is-favorite {
     fill: #37ad79;

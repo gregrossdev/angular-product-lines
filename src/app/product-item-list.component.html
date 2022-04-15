@@ -1,0 +1,10 @@
+<header>
+  <div *ngIf="productItems">{{ productItems | categoryList }}</div>
+</header>
+<section>
+  <app-product-item 
+    [ngClass]="{'line-movies': productItem.line==='Movies', 'line-series':productItem.line==='Series'}"
+    *ngFor="let productItem of productItems"
+    [productItem]="productItem"
+    (delete)="onProductItemDelete($event)"></app-product-item>
+</section>
