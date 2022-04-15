@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export class ProductItemComponent {
   name = `Product Item`;
-  wasWatched() {
-    return true
+  onDelete() {
+    console.log('onDelete')
   }
 }
