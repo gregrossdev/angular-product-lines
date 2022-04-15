@@ -1,0 +1,9 @@
+<section>
+  <header>
+    <h1>Product Lines</h1>
+    <p class="description">Keeping track of all the products.</p>
+  </header>
+  <app-product-item 
+    [productItem]="firstProductItem"
+    (delete)="onProductItemDelete($event)"></app-product-item>
+</section>
