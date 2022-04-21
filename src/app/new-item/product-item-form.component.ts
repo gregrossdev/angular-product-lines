@@ -1,21 +1,22 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ProductItemService } from './product-item.service';
-import { lookupListToken } from './providers';
+import { Router } from '@angular/router';
+import { ProductItemService } from '../product-item.service';
+import { lookupListToken } from '../providers';
 
 @Component({
-  selector: 'app-product-item-form',
+  selector: 'lines-product-item-form',
   templateUrl: './product-item-form.component.html',
   styleUrls: ['./product-item-form.component.css']
 })
-
 export class ProductItemFormComponent implements OnInit {
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private productItemService: ProductItemService,
-    @Inject(lookupListToken) public lookupLists) {}
+    @Inject(lookupListToken) public lookupLists,
+    private router: Router) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -50,6 +51,8 @@ export class ProductItemFormComponent implements OnInit {
 
   onSubmit(productItem) {
     this.productItemService.add(productItem)
-      .subscribe();
+      .subscribe(() => {
+        this.router.navigate(['/', productItem.line]);
+      });
   }
 }

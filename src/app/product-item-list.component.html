@@ -1,23 +1,20 @@
-<nav>
-  <a (click)="getProductItems('')">
-    <img src="assets/04.png" class="icon" />
-  </a>
-  <a (click)="getProductItems('Movies')">
-    <img src="assets/03.png" class="icon" />
-  </a>
-  <a (click)="getProductItems('Series')">
-    <img src="assets/02.png" class="icon" />
-  </a>
-</nav>
-<header 
+<header
     [ngClass]="{'line-movies':line === 'Movies', 'line-series':line === 'Series'}">
     <h2>{{line}}</h2>
-    <div *ngIf="productItems">{{ productItems | categoryList }}</div>
+    <lines-category-list 
+      *ngIf="productItems"
+      [categories]="productItems | categoryList">
+    </lines-category-list>
 </header>
 <section>
-  <app-product-item
-    [ngClass]="{'line-movies': productItem.line==='Movies', 'line-series':productItem.line==='Series'}" 
+  <lines-product-item
+    [ngClass]="{'line-movies': productItem.line==='Movies', 'line-series':productItem.line==='Series'}"
     *ngFor="let productItem of productItems"
     [productItem]="productItem"
-    (delete)="onProductItemDelete($event)"></app-product-item>
+    (delete)="onProductItemDelete($event)"></lines-product-item>
 </section>
+<footer>
+  <a routerLink="/add">
+    <h2>add</h2> 
+  </a>
+</footer>

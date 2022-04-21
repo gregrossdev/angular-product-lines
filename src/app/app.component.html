@@ -1,8 +1,18 @@
+<nav>
+  <a routerLink="/">
+    all
+  </a>
+  <a routerLink="/Movies">
+    movies
+  </a>
+  <a routerLink="/Series">
+    series
+  </a>
+</nav>
 <section>
   <header>
     <h1>Product Lines</h1>
     <p class="description">Keeping track of all the products.</p>
   </header>
-  <app-product-item-form></app-product-item-form>
-  <app-product-item-list></app-product-item-list>
+  <router-outlet></router-outlet>
 </section>
