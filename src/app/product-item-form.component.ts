@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ProductItemService } from './product-item.service';
+import { lookupListToken } from './providers';
 
 @Component({
   selector: 'app-product-item-form',
@@ -7,20 +9,24 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./product-item-form.component.css']
 })
 
-
 export class ProductItemFormComponent implements OnInit {
   form: FormGroup;
 
-  ngOnInit(): void {
-      this.form = new FormGroup({
-        line: new FormControl('Movies'),
-        name: new FormControl('', Validators.compose([
-          Validators.required,
-          Validators.pattern('[\\w\\-\\s\\/]+')
-        ])),
-        category: new FormControl(''),
-        year: new FormControl('', this.yearValidator),
-      });
+  constructor(
+    private formBuilder: FormBuilder,
+    private productItemService: ProductItemService,
+    @Inject(lookupListToken) public lookupLists) {}
+
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      line: this.formBuilder.control('Movies'),
+      name: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[\\w\\-\\s\\/]+')
+      ])),
+      category: this.formBuilder.control(''),
+      year: this.formBuilder.control('', this.yearValidator),
+    });
   }
 
   yearValidator(control: FormControl) {
@@ -43,7 +49,7 @@ export class ProductItemFormComponent implements OnInit {
   }
 
   onSubmit(productItem) {
-    console.log(productItem);
+    this.productItemService.add(productItem)
+      .subscribe();
   }
-
 }

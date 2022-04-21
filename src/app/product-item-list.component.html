@@ -1,9 +1,22 @@
-<header>
-  <div *ngIf="productItems">{{ productItems | categoryList }}</div>
+<nav>
+  <a (click)="getProductItems('')">
+    <img src="assets/04.png" class="icon" />
+  </a>
+  <a (click)="getProductItems('Movies')">
+    <img src="assets/03.png" class="icon" />
+  </a>
+  <a (click)="getProductItems('Series')">
+    <img src="assets/02.png" class="icon" />
+  </a>
+</nav>
+<header 
+    [ngClass]="{'line-movies':line === 'Movies', 'line-series':line === 'Series'}">
+    <h2>{{line}}</h2>
+    <div *ngIf="productItems">{{ productItems | categoryList }}</div>
 </header>
 <section>
-  <app-product-item 
-    [ngClass]="{'line-movies': productItem.line==='Movies', 'line-series':productItem.line==='Series'}"
+  <app-product-item
+    [ngClass]="{'line-movies': productItem.line==='Movies', 'line-series':productItem.line==='Series'}" 
     *ngFor="let productItem of productItems"
     [productItem]="productItem"
     (delete)="onProductItemDelete($event)"></app-product-item>

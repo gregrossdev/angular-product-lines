@@ -1,5 +1,5 @@
 <header>
-  <h2>Add Product to Line</h2>
+  <h2>Add Product to Watch</h2>
 </header>
 <form
   [formGroup]="form"
@@ -8,8 +8,7 @@
     <li>
       <label for="line">Line</label>
       <select name="line" id="line" formControlName="line">
-        <option value="Movies">Movies</option>
-        <option value="Series">Series</option>
+        <option *ngFor="let line of lookupLists.lines" value="{{line}}">{{line}}</option>
       </select>
     </li>
     <li>
